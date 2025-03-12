@@ -37,10 +37,10 @@ def measure_performance(executor, task, inputs):
     elapsed_time = end_time - start_time
     throughput = len(inputs) / elapsed_time  
 
-    print(f"{executor.__name__} time: {elapsed_time:.2f} s")
-    print(f"{executor.__name__} throughput: {throughput:.2f} tasks/sec")
-    print(f"{executor.__name__} CPU usage: {final_cpu - initial_cpu:.2f}%")
-    print(f"{executor.__name__} Memory usage: {(final_memory - initial_memory) / (1024 ** 2):.2f} MB\n")
+    print(f"{type(executor).__name__} time: {elapsed_time:.2f} s")
+    print(f"{type(executor).__name__} throughput: {throughput:.2f} tasks/sec")
+    print(f"{type(executor).__name__} CPU usage: {final_cpu - initial_cpu:.2f}%")
+    print(f"{type(executor).__name__} Memory usage: {(final_memory - initial_memory) / (1024 ** 2):.2f} MB\n")
 
 def main():
     num_tasks = 1000 
