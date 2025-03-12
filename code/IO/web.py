@@ -60,3 +60,16 @@ if __name__ == "__main__":
 
 # Using ProcessPoolExecutor...
 # ProcessPool - Time taken: 7.60s
+
+# 100
+# Using ThreadPoolExecutor...
+# ThreadPool - Time taken: 16.55s
+
+# Using ProcessPoolExecutor...
+# ProcessPool - Time taken: 15.98s
+
+# Using ThreadPoolExecutor...
+# ThreadPool - Time taken: 15.84s
+
+# Using ProcessPoolExecutor...
+# ProcessPool - Time taken: 17.07s
