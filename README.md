@@ -1,4 +1,4 @@
-# Projec_ECS251  
+# Project_ECS251  
 
 ## Aims
 
