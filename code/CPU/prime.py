@@ -24,32 +24,30 @@ def measure_performance(executor, task, inputs):
     
     start_time = time.time()
     process = psutil.Process()  
-    initial_cpu = process.cpu_percent(interval=None)  
     initial_memory = process.memory_info().rss  
     
     with executor(max_workers=4) as executor:
         results = list(executor.map(task, inputs))
+        cpu_usage = psutil.cpu_percent(interval=0)
     
     end_time = time.time()
-    final_cpu = process.cpu_percent(interval=None)  
     final_memory = process.memory_info().rss  
-    
     elapsed_time = end_time - start_time
     throughput = len(inputs) / elapsed_time  
 
-    print(f"{type(executor).__name__} time: {elapsed_time:.2f} s")
-    print(f"{type(executor).__name__} throughput: {throughput:.2f} tasks/sec")
-    print(f"{type(executor).__name__} CPU usage: {final_cpu - initial_cpu:.2f}%")
+    print(f"{type(executor).__name__} Time: {elapsed_time:.2f} s")
+    print(f"{type(executor).__name__} Throughput: {throughput:.2f} tasks/sec")
+    print(f"{type(executor).__name__} CPU usage: {cpu_usage:.2f}%")
     print(f"{type(executor).__name__} Memory usage: {(final_memory - initial_memory) / (1024 ** 2):.2f} MB\n")
 
 def main():
     num_tasks = 1000 
     numbers = generate_numbers(num_tasks)
 
-    print(f"ThreadPoolExecutor:")
+    print("ThreadPoolExecutor:")
     measure_performance(ThreadPoolExecutor, is_prime, numbers)
 
-    print(f"ProcessPoolExecutor:")
+    print("ProcessPoolExecutor:")
     measure_performance(ProcessPoolExecutor, is_prime, numbers)
 
 if __name__ == "__main__":
