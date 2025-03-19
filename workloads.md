@@ -92,23 +92,31 @@ with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
 
 ---
 
-### **Example 4: Data Compression (GIL-Intensive Workload)**  
-Compressing files using Gzip, simulating a real-world workload.  
+### **Example 4: Prime Number Check**  
+Checking if large random numbers are prime to simulate a CPU intensive workload.  
 
 ```python
-import concurrent.futures
-import gzip
-import shutil
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+import random
+import time
 
-def compress_file(filename):
-    with open(filename, 'rb') as f_in:
-        with gzip.open(filename + '.gz', 'wb') as f_out:
-            shutil.copyfileobj(f_in, f_out)
+def is_prime(n):
+    if n < 2: return False
+    if n in (2, 3): return True
+    if n % 2 == 0 or n % 3 == 0: return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0: return False
+        i += 6
+    return True
 
-files = ["large_file1.txt", "large_file2.txt", "large_file3.txt"]
+numbers = [random.randint(10**12, 10**15) for _ in range(1000)]
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-    executor.map(compress_file, files)
+with ThreadPoolExecutor(max_workers=4) as executor:
+    executor.map(is_prime, numbers)
+
+with ProcessPoolExecutor(max_workers=4) as executor:
+    executor.map(is_prime, numbers)
 ```
 **Metrics to Measure:**  
 - Compression time across different thread pool sizes  
