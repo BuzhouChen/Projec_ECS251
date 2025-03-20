@@ -17,7 +17,7 @@ Both tasks are done on a set of three images: a high resolution image (1792x1024
 3. Open a terminal on your local device (Command prompt, Visual Studio, etc.)
 4. Navigate to the location of the repository on your local device.
 5. To run each of the files, run this command on your terminal:
-`md
-python <file-name>.py
-`
+
+`python <file-name>.py`
+
 where `file-name` is replaced by either "ML_image_processing" or "image_processing" depending on which file you wish to run.
